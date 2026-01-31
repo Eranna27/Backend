@@ -1,7 +1,6 @@
 require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
-const multer = require("multer");
 require("./Config/DBConnect");
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -12,17 +11,6 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true, limit: "10mb" }));
 app.use(router);
 
-// Global File Upload Error
-
-app.use((err, req, res, next) => {
-  if (err instanceof multer.MulterError) {
-    res.status(200).json({ success: false, error: err.message });
-  } else if (err) {
-    res.status(200).json({ success: false, error: err.message });
-  } else {
-    next();
-  }
-});
 
 // Server Starting
 
