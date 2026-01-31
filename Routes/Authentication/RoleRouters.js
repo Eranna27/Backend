@@ -3,7 +3,7 @@ const roleRouters = new express.Router();
 const roleController = require("../../Controllers/Authentication/RoleController");
 
 // Login
-router.get("/", (req, res) => {
+roleRouters.get("/", (req, res) => {
     res.send("Backend is live 🚀");
 });
 
