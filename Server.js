@@ -4,7 +4,7 @@ const cors = require("cors");
 const multer = require("multer");
 require("./Config/DBConnect");
 const app = express();
-const PORT = process.env.PORT;
+const PORT = process.env.PORT || 3000;
 const router = require("./Routes/Routers");
 
 app.use(cors());
