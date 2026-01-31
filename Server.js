@@ -9,7 +9,7 @@ const router = require("./Routes/Routers");
 
 app.use(cors());
 app.use(express.json());
-app.use(express.urlencoded({ extended: true, limit: "350mb" }));
+app.use(express.urlencoded({ extended: true, limit: "10mb" }));
 app.use(router);
 
 // Global File Upload Error
