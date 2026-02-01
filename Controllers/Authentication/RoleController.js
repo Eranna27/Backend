@@ -96,7 +96,6 @@ exports.register = async (req, res) => {
 
   try {
     const existingUser = await roleModel.findOne({ email });
-
     if (existingUser) {
       return sendErrorResponse(
         res,
@@ -130,7 +129,7 @@ exports.register = async (req, res) => {
       { userID: newUser._id }
     );
   } catch (error) {
-    console.error("Error Registering user:", error);
+    console.error("Error Registering user:", error.message);
     return sendErrorResponse(
       res,
       STATUS.INTERNAL_SERVER_ERROR,
