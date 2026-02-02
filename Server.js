@@ -11,7 +11,10 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true, limit: "10mb" }));
 app.use(router);
-app.use(session({ secret: "secret", resave: false, saveUninitialized: true }));
+app.use(session({
+  secret: process.env.SECRET_KEY,
+  resave: false, saveUninitialized: true
+}));
 app.use(passport.initialize());
 app.use(passport.session());
 
