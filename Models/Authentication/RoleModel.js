@@ -4,16 +4,19 @@ const { SECRET_KEY } = process.env;
 
 const authSchema = new mongoose.Schema(
   {
-    name: { type: String, required: true },
-    email: { type: String, required: true, lowercase: true },
-    companyName: { type: String, required: true },
+    name: {
+      type: String,
+      default: ""
+    },
+    email: { type: String, default: "", lowercase: true },
+    companyName: { type: String, default: "" },
     password: {
       type: String,
-      required: true
+      default: ""
     },
     role: {
       type: String,
-      required: true,
+      default: "",
       default: "User",
     },
     isAgency: {
@@ -22,15 +25,15 @@ const authSchema = new mongoose.Schema(
     },
     mobileNumber: {
       type: String,
-      required: true,
+      default: "",
     },
     authProvider: {
       type: String,
       enum: ["local", "google"],
       default: "local",
     },
-    createdDate: { type: String, required: true },
-    updatedDate: { type: String, required: true },
+    createdDate: { type: String, default: "" },
+    updatedDate: { type: String, default: "" },
   },
   {
     collection: "Roles",
