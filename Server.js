@@ -9,7 +9,10 @@ require("./Config/DBConnect");
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-app.use(cors());
+app.use(cors({
+  origin: process.env.WEB_URL,
+  credentials: true
+}));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true, limit: "10mb" }));
 app.use(session({
@@ -17,8 +20,8 @@ app.use(session({
   resave: false,
   saveUninitialized: false,
   store: MongoStore.create({
-    mongoUrl: process.env.DATABASE, 
-    collectionName: 'sessions', 
+    mongoUrl: process.env.DATABASE,
+    collectionName: 'sessions',
     ttl: 14 * 24 * 60 * 60,
   }),
   cookie: {

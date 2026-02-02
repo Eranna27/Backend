@@ -16,7 +16,6 @@ const authSchema = new mongoose.Schema(
     },
     role: {
       type: String,
-      default: "",
       default: "User",
     },
     isAgency: {
