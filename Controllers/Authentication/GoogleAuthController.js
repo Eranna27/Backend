@@ -8,12 +8,13 @@ passport.use(
     {
       clientID: process.env.GOOGLE_CLIENT_ID,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-      callbackURL: "/google/callback",
+      // callbackURL: "/google/callback",
+      callbackURL: `${process.env.BASE_URL}/auth/google/callback`,
       scope: ["profile", "email"],
     },
     async (accessToken, refreshToken, profile, done) => {
       try {
-        let user = await roleModel.findOne({ email: profile.emails[0].value, role:"User" });
+        let user = await roleModel.findOne({ email: profile.emails[0].value, role: "User" });
 
         const currentISTDateString = moment
           .tz("Asia/Kolkata")
