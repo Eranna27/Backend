@@ -4,7 +4,7 @@ const cors = require("cors");
 const router = require("./Routes/Routers");
 const passport = require("./Controllers/Authentication/GoogleAuthController");
 const session = require("express-session");
-const MongoStore = require("connect-mongo");
+const MongoStore = require("connect-mongo").default;
 require("./Config/DBConnect");
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -13,16 +13,19 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true, limit: "10mb" }));
 app.use(session({
-  secret: process.env.SECRET_KEY,
-  resave: false, saveUninitialized: true,
+  secret: process.env.SECRET_KEY || "secret123",
+  resave: false,
+  saveUninitialized: false,
   store: MongoStore.create({
-    mongoUrl: process.env.DATABASE,
+    mongoUrl: process.env.DATABASE, 
+    collectionName: 'sessions', 
     ttl: 14 * 24 * 60 * 60,
   }),
   cookie: {
-    maxAge: 24 * 60 * 60 * 1000,
+    maxAge: 24 * 60 * 60 * 1000, // 1 day
   },
 }));
+
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(router);
