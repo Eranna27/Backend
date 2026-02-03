@@ -5,6 +5,7 @@ const router = require("./Routes/Routers");
 const passport = require("./Controllers/Authentication/GoogleAuthController");
 const session = require("express-session");
 const MongoStore = require("connect-mongo").default;
+const mongoSanitize = require("express-mongo-sanitize");
 require("./Config/DBConnect");
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -28,7 +29,7 @@ app.use(session({
     maxAge: 24 * 60 * 60 * 1000, // 1 day
   },
 }));
-
+app.use(mongoSanitize());
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(router);
