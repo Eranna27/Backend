@@ -8,6 +8,7 @@ mongoose
     serverSelectionTimeoutMS: 30000, 
     socketTimeoutMS: 360000, 
     connectTimeoutMS: 30000, 
+    readPreference: "secondaryPreferred"
   })
   .then(() => console.log("Database Connected"))
   .catch((error) => console.error("Database Connection Error:", error));
